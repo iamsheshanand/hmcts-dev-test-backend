@@ -1,0 +1,88 @@
+services:
+  tasks:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tasks
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER_NAME=${DB_USER_NAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_OPTIONS=${DB_OPTIONS}
+    ports:
+      - "${SERVER_PORT:-4000}:4000"
+    depends_on:
+      - postgres
+    networks:
+      - hmcts-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:latest
+    container_name: tasks_postgres_container
+    environment:
+      POSTGRES_DB: ${DB_HOST:-postgres}
+      POSTGRES_USER: ${DB_USER_NAME:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_OPTIONS: ${DB_OPTIONS:-?sslmode=disable}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - hmcts-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER_NAME:-root} -d ${DB_HOST:-postgres}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:10.1.0
+    container_name: grafana
+    volumes:
+      - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
+      - ./docker/grafana-data:/var/lib/grafana
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "3000:3000"
+    networks:
+      - hmcts-network
+    depends_on:
+      - prometheus
+
+
+  prometheus:
+    image: prom/prometheus:v2.46.0
+    container_name: prometheus
+    command:
+      - --enable-feature=exemplar-storage
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - hmcts-network
+
+
+
+
+volumes:
+  postgres_data:
+    name: postgres_data
+
+networks:
+  hmcts-network:
+    driver: bridge
+
+
