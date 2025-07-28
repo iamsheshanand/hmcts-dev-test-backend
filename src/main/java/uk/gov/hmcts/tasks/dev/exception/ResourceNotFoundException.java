@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.exception;
+package uk.gov.hmcts.tasks.dev.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

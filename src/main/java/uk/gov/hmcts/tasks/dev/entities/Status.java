@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.entities;
+package uk.gov.hmcts.tasks.dev.entities;
 
 public enum Status {
     TODO,

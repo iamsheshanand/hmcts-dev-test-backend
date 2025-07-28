@@ -1,10 +1,10 @@
-package uk.gov.hmcts.tasks.dev.controllers.services;
+package uk.gov.hmcts.tasks.dev.services;
 
 import org.springframework.stereotype.Service;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Task;
-import uk.gov.hmcts.tasks.dev.controllers.mapper.TaskMapper;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.repository.TasksRepository;
+import uk.gov.hmcts.tasks.dev.entities.Task;
+import uk.gov.hmcts.tasks.dev.mapper.TaskMapper;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.repository.TasksRepository;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package uk.gov.hmcts.tasks.dev.controllers.models;
+package uk.gov.hmcts.tasks.dev.models;
 
 
-import uk.gov.hmcts.tasks.dev.controllers.entities.Status;
+import uk.gov.hmcts.tasks.dev.entities.Status;
 
 import java.time.LocalDate;
 

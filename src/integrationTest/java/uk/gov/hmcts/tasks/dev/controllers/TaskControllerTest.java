@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.controllers;
+package uk.gov.hmcts.tasks.dev.controllers;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,12 +8,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Status;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Task;
-import uk.gov.hmcts.tasks.dev.controllers.mapper.TaskMapper;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskResponse;
-import uk.gov.hmcts.tasks.dev.controllers.services.TasksService;
+import uk.gov.hmcts.tasks.dev.entities.Status;
+import uk.gov.hmcts.tasks.dev.entities.Task;
+import uk.gov.hmcts.tasks.dev.mapper.TaskMapper;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.models.TaskResponse;
+import uk.gov.hmcts.tasks.dev.services.TasksService;
 
 import java.util.List;
 import java.util.Optional;

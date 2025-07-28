@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers;
+package uk.gov.hmcts.tasks.dev;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,9 +18,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Status;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskResponse;
+import uk.gov.hmcts.tasks.dev.entities.Status;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.models.TaskResponse;
 
 import java.time.LocalDate;
 

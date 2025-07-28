@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers;
+package uk.gov.hmcts.tasks.dev;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

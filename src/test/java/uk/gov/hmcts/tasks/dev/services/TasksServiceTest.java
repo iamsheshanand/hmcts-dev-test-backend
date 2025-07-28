@@ -6,12 +6,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Status;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Task;
-import uk.gov.hmcts.tasks.dev.controllers.mapper.TaskMapper;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.repository.TasksRepository;
-import uk.gov.hmcts.tasks.dev.controllers.services.TasksService;
+import uk.gov.hmcts.tasks.dev.entities.Status;
+import uk.gov.hmcts.tasks.dev.entities.Task;
+import uk.gov.hmcts.tasks.dev.mapper.TaskMapper;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.repository.TasksRepository;
 
 import java.time.LocalDate;
 import java.util.List;

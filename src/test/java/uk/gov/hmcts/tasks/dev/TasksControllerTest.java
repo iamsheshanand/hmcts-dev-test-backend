@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers;
+package uk.gov.hmcts.tasks.dev;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,13 +9,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import uk.gov.hmcts.tasks.dev.controllers.controllers.TasksController;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Status;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Task;
-import uk.gov.hmcts.tasks.dev.controllers.mapper.TaskMapper;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskResponse;
-import uk.gov.hmcts.tasks.dev.controllers.services.TasksService;
+import uk.gov.hmcts.tasks.dev.controllers.TasksController;
+import uk.gov.hmcts.tasks.dev.entities.Status;
+import uk.gov.hmcts.tasks.dev.entities.Task;
+import uk.gov.hmcts.tasks.dev.mapper.TaskMapper;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.models.TaskResponse;
+import uk.gov.hmcts.tasks.dev.services.TasksService;
 
 import java.time.LocalDate;
 import java.util.List;

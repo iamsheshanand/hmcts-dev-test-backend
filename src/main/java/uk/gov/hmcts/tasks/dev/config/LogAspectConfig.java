@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.config;
+package uk.gov.hmcts.tasks.dev.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;

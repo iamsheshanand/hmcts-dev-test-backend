@@ -1,11 +1,11 @@
-package uk.gov.hmcts.tasks.dev.controllers.mapper;
+package uk.gov.hmcts.tasks.dev.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Task;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskResponse;
+import uk.gov.hmcts.tasks.dev.entities.Task;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.models.TaskResponse;
 
 @Mapper(componentModel = "spring")
 @Component

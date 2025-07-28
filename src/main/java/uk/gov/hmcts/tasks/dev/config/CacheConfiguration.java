@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.config;
+package uk.gov.hmcts.tasks.dev.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.slf4j.Slf4j;

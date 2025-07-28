@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.config;
+package uk.gov.hmcts.tasks.dev.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

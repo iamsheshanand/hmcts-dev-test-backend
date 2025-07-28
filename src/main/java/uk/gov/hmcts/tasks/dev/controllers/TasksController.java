@@ -1,4 +1,4 @@
-package uk.gov.hmcts.tasks.dev.controllers.controllers;
+package uk.gov.hmcts.tasks.dev.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.hmcts.tasks.dev.controllers.entities.Task;
-import uk.gov.hmcts.tasks.dev.controllers.exception.ResourceNotFoundException;
-import uk.gov.hmcts.tasks.dev.controllers.mapper.TaskMapper;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskRequest;
-import uk.gov.hmcts.tasks.dev.controllers.models.TaskResponse;
-import uk.gov.hmcts.tasks.dev.controllers.services.TasksService;
+import uk.gov.hmcts.tasks.dev.entities.Task;
+import uk.gov.hmcts.tasks.dev.exception.ResourceNotFoundException;
+import uk.gov.hmcts.tasks.dev.mapper.TaskMapper;
+import uk.gov.hmcts.tasks.dev.models.TaskRequest;
+import uk.gov.hmcts.tasks.dev.models.TaskResponse;
+import uk.gov.hmcts.tasks.dev.services.TasksService;
 
 import java.net.URI;
 import java.util.List;
