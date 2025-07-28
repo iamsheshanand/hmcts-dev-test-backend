@@ -9,7 +9,7 @@ plugins {
   id 'uk.gov.hmcts.java' version '0.12.67'
 }
 
-group = 'uk.gov.hmcts.reform'
+group = 'uk.gov.hmcts.tasks'
 version = '0.0.1'
 
 java {
@@ -114,8 +114,8 @@ project.tasks['check'].dependsOn integration
 
 sonarqube {
   properties {
-    property "sonar.projectName", "Reform :: test-backend"
-    property "sonar.projectKey", "uk.gov.hmcts.reform:test-backend"
+    property "sonar.projectName", "Tasks :: test-backend"
+    property "sonar.projectKey", "uk.gov.hmcts.tasks:test-backend"
   }
 }
 
@@ -152,9 +152,21 @@ ext['snakeyaml.version'] = '2.2'
 dependencies {
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+  implementation 'io.micrometer:micrometer-registry-prometheus:1.15.0'
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-json'
   implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.8.9'
+
+  implementation 'org.springframework.boot:spring-boot-starter-cache'
+  implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
+
+  implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.6.3'
+  implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.6.3'
+  annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.6.3'
+
+  implementation 'com.h2database:h2:2.3.232'
+  implementation 'org.postgresql:postgresql:42.7.3'
 
   implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: '6.1.9'
 
@@ -163,11 +175,19 @@ dependencies {
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
   implementation group: 'ch.qos.logback', name: 'logback-core', version: logbackVersion
 
+  testImplementation 'com.h2database:h2'
+  testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
   implementation group: 'io.rest-assured', name: 'rest-assured'
   implementation group: 'org.projectlombok', name: 'lombok'
   annotationProcessor 'org.projectlombok:lombok'
 
-  testImplementation(platform('org.junit:junit-bom:5.13.4'))
+  testImplementation(platform('org.junit:junit-bom:5.11.3'))
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
+  testImplementation 'org.junit.jupiter:junit-jupiter-params'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+  testImplementation 'org.junit.platform:junit-platform-launcher'
+  testImplementation 'org.junit.platform:junit-platform-engine'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
   testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', {
     exclude group: 'junit', module: 'junit'
@@ -175,7 +195,7 @@ dependencies {
   }
 }
 
-mainClassName = 'uk.gov.hmcts.reform.dev.Application'
+mainClassName = 'uk.gov.hmcts.tasks.dev.Application'
 
 bootJar {
   archiveFileName = "test-backend.jar"
@@ -190,6 +210,10 @@ rootProject.tasks.named("processSmokeTestResources") {
   duplicatesStrategy = 'include'
 }
 
+rootProject.tasks.named("processFunctionalTestResources") {
+  duplicatesStrategy = 'include'
+}
+
 wrapper {
-    distributionType = Wrapper.DistributionType.ALL
+  distributionType = Wrapper.DistributionType.ALL
 }

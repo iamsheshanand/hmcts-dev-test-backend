@@ -1,5 +1,5 @@
 server:
-  port: 4000
+  port: ${SERVER_PORT:4000}
   shutdown: "graceful"
 
 # If you want to use a database then uncomment the `group:, readiness: and include: "db"`
@@ -8,42 +8,67 @@ management:
   endpoint:
     health:
       show-details: "always"
-      # group:
-      #  readiness:
-      #   include: "db"
+      group:
+        readiness:
+          include: "db"
   endpoints:
     web:
-      base-path: /
+      base-path: /actuator
       exposure:
-        include: info # should we have more?
+        include: "*"
+  metrics:
+    tags:
+      application: test-backend
 
 springdoc:
-  packagesToScan: uk.gov.hmcts.reform.dev.controllers
+  packagesToScan: uk.gov.hmcts.tasks.dev.controllers
   writer-with-order-by-keys: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  info:
+    title: "Task Management API"
+    version: "1.0"
+    description: "API for managing Tasks"
 
 spring:
-  config:
-    import: "optional:configtree:/mnt/secrets/test/"
+  #  config:
+  #    import: "optional:configtree:/mnt/secrets/test/"
   application:
     name: Dev Test
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}${DB_OPTIONS:}
-#    username: ${DB_USER_NAME}
-#    password: ${DB_PASSWORD}
-#    properties:
-#      charSet: UTF-8
-#    hikari:
-#      minimumIdle: 2
-#      maximumPoolSize: 10
-#      idleTimeout: 10000
-#      poolName: {to-be-defined}HikariCP
-#      maxLifetime: 7200000
-#      connectionTimeout: 30000
-#  jpa:
-#    properties:
-#      hibernate:
-#        jdbc:
-#          lob:
-#            # silence the 'wall-of-text' - unnecessary exception throw about blob types
-#            non_contextual_creation: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:tasks}${DB_OPTIONS:}
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+    properties:
+      charSet: UTF-8
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 10000
+      poolName: PostgresHikariCP
+      maxLifetime: 7200000
+      connectionTimeout: 30000
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            # silence the 'wall-of-text' - unnecessary exception throw about blob types
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+        hbm2ddl:
+          auto: update
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    root: info
+    uk.gov.hmcts.tasks.dev: DEBUG
+
+allowed:
+  origin: "http://localhost:3100"
