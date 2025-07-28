@@ -18,6 +18,10 @@ java {
   }
 }
 
+bootRun {
+  systemProperty 'spring.profiles.active', 'local'
+}
+
 sourceSets {
   functionalTest {
     java {
