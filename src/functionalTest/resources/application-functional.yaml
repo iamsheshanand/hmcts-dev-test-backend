@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT:4000}
+  shutdown: "graceful"
+
+springdoc:
+  packagesToScan: uk.gov.hmcts.tasks.dev.controllers
+  writer-with-order-by-keys: true
+
+spring:
+  application:
+    name: Dev Test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: "jdbc:h2:mem:taskdb"
+    username: "sa"
+    password:
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            # silence the 'wall-of-text' - unnecessary exception throw about blob types
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+logging:
+  level:
+    root: info
+    uk.gov.hmcts.tasks.dev: DEBUG
+
+allowed:
+  origin: 'http://localhost:3100'
+
+TEST_URL: 'http://localhost:4000'

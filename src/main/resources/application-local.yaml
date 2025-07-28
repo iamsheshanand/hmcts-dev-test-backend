@@ -1,0 +1,64 @@
+server:
+  port: ${SERVER_PORT:4000}
+  shutdown: "graceful"
+
+# If you want to use a database then uncomment the `group:, readiness: and include: "db"`
+# lines in the health probes and uncomment the datasource section
+management:
+  endpoint:
+    health:
+      show-details: "always"
+      group:
+        readiness:
+          include: "db"
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: test-backend
+
+springdoc:
+  packagesToScan: uk.gov.hmcts.tasks.dev.controllers
+  writer-with-order-by-keys: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  info:
+    title: "Task Management API"
+    version: "1.0"
+    description: "API for managing Tasks"
+
+
+spring:
+  #  config:
+  #    import: "optional:configtree:/mnt/secrets/test/"
+  application:
+    name: Dev Test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: "jdbc:h2:mem:taskdb"
+    username: "sa"
+    password:
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            # silence the 'wall-of-text' - unnecessary exception throw about blob types
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+logging:
+  level:
+    root: info
+    uk.gov.hmcts.tasks.dev: DEBUG
+
+allowed:
+  origin: 'http://localhost:3100'
