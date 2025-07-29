@@ -46,7 +46,7 @@ Tasks API would be available at http://localhost:4000 *after* the service is up 
 
 #### Additional
  - The project uses `springdoc-openapi-starter-webmvc-ui`.
- - This makes OpenAPI Task API definition available at http://localhost:4000/swagger-ui/index.html.
+   This makes OpenAPI Task API definition available at http://localhost:4000/swagger-ui/index.html.
  - Solution uses AOP for logging
  - Caching has also been used with Caffeine
  - Grafana has been added with Prometheus and Metrics to monitor the API with Spring Boot 3.x statistics.
