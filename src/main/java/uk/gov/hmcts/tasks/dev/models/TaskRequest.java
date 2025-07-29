@@ -1,6 +1,7 @@
 package uk.gov.hmcts.tasks.dev.models;
 
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import uk.gov.hmcts.tasks.dev.entities.Status;
 
 import java.time.LocalDate;
@@ -42,5 +43,15 @@ public class TaskRequest {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .append("title", title)
+            .append("description", description)
+            .append("status", status)
+            .append("dueDate", dueDate)
+            .toString();
     }
 }
