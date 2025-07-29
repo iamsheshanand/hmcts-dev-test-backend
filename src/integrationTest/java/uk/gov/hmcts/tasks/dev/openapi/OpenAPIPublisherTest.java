@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,9 +22,7 @@ public class OpenAPIPublisherTest {
 
     @Test
     void testOpenAPISpecification() throws IOException {
-        String openApiPath = new File("./tasks-openapi-specification.yml")
-                .toURI()
-                .toString();
+        String openApiPath = "classpath:tasks-openapi-specification.yml";
 
         OpenAPI openAPI = new OpenAPIV3Parser()
                 .readLocation(resourceLoader.getResource(openApiPath).getURI().toString(), null, new ParseOptions())
