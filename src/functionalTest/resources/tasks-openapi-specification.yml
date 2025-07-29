@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:4000
+    description: Generated server url
+paths:
+  /tasks:
+    get:
+      description: Retrieves a list of all tasks
+      operationId: get
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskResponse'
+          description: Successfully retrieved list
+        '500':
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskResponse'
+          description: Internal Server Error
+      summary: Get all tasks
+      tags:
+        - tasks-controller
+    post:
+      description: Creates a new task with the current timestamp as due date
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: Task created successfully
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: Unexpected error (should not occur)
+      summary: Create a new task
+      tags:
+        - tasks-controller
+  /tasks/{id}:
+    delete:
+      description: Deletes a task by its unique identifier
+      operationId: delete
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Task deleted successfully
+        '404':
+          description: Task not found
+      summary: Delete a task by ID
+      tags:
+        - tasks-controller
+    get:
+      description: Retrieves a task by its unique identifier
+      operationId: byId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: Successfully retrieved task
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: Task not found
+      summary: Get a task by ID
+      tags:
+        - tasks-controller
+    patch:
+      description: Updates specific fields of a task identified by its ID
+      operationId: partialUpdate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: Task partially updated successfully
+        '204':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: No content (should not occur with current logic)
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+          description: Task not found
+      summary: Partially update a task by ID
+      tags:
+        - tasks-controller
+components:
+  schemas:
+    TaskRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+            - TODO
+            - IN_PROGRESS
+            - COMPLETED
+        title:
+          type: string
+    TaskResponse:
+      type: object
+      properties:
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+            - TODO
+            - IN_PROGRESS
+            - COMPLETED
+        title:
+          type: string

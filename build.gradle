@@ -181,6 +181,7 @@ dependencies {
 
   testImplementation 'com.h2database:h2'
   testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+  integrationTestImplementation 'io.swagger.parser.v3:swagger-parser-v3:2.1.26'
 
   implementation group: 'io.rest-assured', name: 'rest-assured'
   implementation group: 'org.projectlombok', name: 'lombok'
@@ -215,6 +216,10 @@ rootProject.tasks.named("processSmokeTestResources") {
 }
 
 rootProject.tasks.named("processFunctionalTestResources") {
+  duplicatesStrategy = 'include'
+}
+
+rootProject.tasks.named("processIntegrationTestResources") {
   duplicatesStrategy = 'include'
 }
 
